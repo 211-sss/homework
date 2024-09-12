@@ -1,0 +1,251 @@
+\documentclass{ctexart}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\title{命令行与Python}
+\author{耿惠生 23020007028}
+\date{September 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{练习内容}
+\subsection{命令行环境}
+\subsubsection{删除空目录}
+rmdir
+\subsubsection{移动、重命名}
+mv
+\subsubsection{合并}
+cat
+\subsection{Python入门基础}
+\subsubsection{循环打印数字}
+for i in range(1, 11):
+
+    print(i)
+
+结果：打印1到10的数字
+\subsubsection{求和}
+def add(a, b):
+
+return a + b
+
+result = add(3, 5)
+
+print(result)
+
+结果：输出3和5的和，即8
+\subsubsection{读取文件内容}
+with open("file.txt", "r") as file:
+
+content = file.read()
+
+print(content)
+
+结果：打开file.txt，读取并打印文件内容
+\subsubsection{利用模板}
+import math
+
+radius = 5
+
+area = math.pi * radius **2
+
+print(area)
+
+结果：利用math，输出圆的面积
+\subsubsection{斐波那契}
+def fibonacci(n)
+
+if n <= 1:
+
+return n
+
+else:
+
+return fibonacci(n-1) + fibonacci(n-2)
+
+n = 10
+
+print("The", n, "th Fibonacci number is:", fibonacci(n))
+
+结果：计算10的斐波那契数
+\subsubsection{字典储存}
+student = {
+
+"name":"John",
+
+"age":20,
+
+"grade":"A"
+
+}
+
+print(student)
+
+结果：输出学生信息
+\subsubsection{阶乘}
+def factorial(n):
+
+    if n == 0:
+    
+        return 1
+        
+    else:
+    
+        return n * factorial(n-1)
+
+num = 5
+
+print("The factorial of", num, "is", factorial(num))
+
+结果：输出5的阶乘，即120
+\subsection{Python视觉设计}
+\subsubsection{显示图像}
+import cv2
+
+image = cv2.imread('example.webp')
+
+cv2.imshow('Example Image', image)
+
+cv2.waitKey(0)
+
+cv2.destroyAllWindows()
+
+结果：利用cv2，读取example.webp，并显示该图片
+
+\includegraphics[width=0.5\textwidth]{屏幕截图 2024-09-12 224356}
+\subsubsection{保存图片}
+cv2.imwrite('example.webp', image)
+
+结果：保存图片
+\subsubsection{灰化图像}
+import cv2
+
+image = cv2.imread('example.webp')
+
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+cv2.imshow('Grayscale Image', gray_image)
+
+cv2.waitKey(0)
+
+cv2.destroyAllWindows()
+
+结果：彩色图片变为灰色
+
+\includegraphics[width=0.5\textwidth]{屏幕截图 2024-09-12 224900.png}
+\subsubsection{缩放图片}
+import cv2
+
+image = cv2.imread('example.webp')
+
+scale_percent = 50 
+
+width = int(image.shape[1] * scale_percent / 100)
+
+height = int(image.shape[0] * scale_percent / 100)
+
+dim = (width, height)
+
+resized_image = cv2.resize(image, dim, interpolation=cv2.INTER_AREA)
+
+cv2.imshow('Resized Image', resized_image)
+
+cv2.waitKey(0)
+
+cv2.destroyAllWindows()
+
+结果：将图片缩小至20%
+
+\includegraphics[width=0.5\textwidth]{屏幕截图 2024-09-12 225142}
+\subsubsection{边缘检测}
+import cv2
+
+image = cv2.imread('example.webp', cv2.IMREAD_GRAYSCALE)
+
+edges = cv2.Canny(image, 100, 200)
+
+cv2.imshow('Edges', edges)
+
+cv2.waitKey(0)
+
+cv2.destroyAllWindows()
+
+结果：对example.webp边缘检测，并输出检测结果
+
+\includegraphics[width=0.5\textwidth]{屏幕截图 2024-09-12 225312}
+\subsubsection{图形绘制与文本插入}
+import cv2
+
+image = cv2.imread('example.webp')
+
+cv2.rectangle(image, (50, 50), (200, 200), (0, 255, 0), 2)
+
+cv2.circle(image, (300, 300), 50, (0, 0, 255), -1)
+
+cv2.putText(image, 'I love you', (50, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+
+cv2.imshow('Drawn Image', image)
+
+cv2.waitKey(0)
+
+cv2.destroyAllWindows()
+
+结果：在图片上插入矩形，圆形，并输入文字“I love you”
+
+\includegraphics[width=0.5\textwidth]{屏幕截图 2024-09-12 225504}
+\subsubsection{高斯模糊}
+blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
+
+结果：将灰化图片模糊化
+
+\includegraphics[width=0.5\textwidth]{屏幕截图 2024-09-12 225707}
+\subsubsection{轮廓检测}
+import cv2
+import numpy as np
+
+image = cv2.imread('example.jpg')
+
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+blurred_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
+
+edges = cv2.Canny(blurred_image, 50, 150)
+
+contours, hierarchy = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+cv2.drawContours(image, contours, -1, (0, 255, 0), 2)
+
+cv2.imshow('Image with Contours', image)
+
+cv2.waitKey(0)
+
+cv2.destroyAllWindows()
+
+结果：绘制图片轮廓并显示轮廓检测后的图片
+
+\includegraphics[width=0.5\textwidth]{屏幕截图 2024-09-12 225825}
+\subsubsection{旋转图片}
+from PIL import Image
+
+def rotate_image(image_path, angle):
+
+    image = Image.open(image_path)
+    
+    rotated_image = image.rotate(angle)
+    
+    rotated_image.save("rotated_image.jpg")
+
+rotate_image("example.webp", 90)
+
+结果：example.webp旋转了90度
+\
+\
+\section{使用感悟}
+\subsection{Python视觉设计 }
+\subsubsection{简洁}
+Python语法简洁，这使我们在视觉设计中实现复杂的算法和功能，使用起来十分便利。 
+\subsubsection{库丰富}
+Python有许多用于图像处理和视觉设计的库，如PIL、OpenCV、Matplotlib等。这些库提供了丰富的功能，是我们用简单的代码实现强大的功能。  
+\section{github地址}
+\url{https://github.com/211-sss/homework}
+\end{document}

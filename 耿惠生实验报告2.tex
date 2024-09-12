@@ -1,0 +1,193 @@
+\documentclass{ctexart}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\title{Shell与Vim}
+\author{耿惠生 23020007028}
+\date{September 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{练习内容}
+\subsection{Shell}
+\subsubsection{ls拓展操作}
+ls -lah --sort=time --color  
+
+-l：以长格式列出文件，显示详细信息
+
+-a：包括所有文件和隐藏文件 
+
+-h：以人类可读的格式显示文件大小 
+
+--sort=time：根据最近访问的时间排序文件 
+
+--color：以彩色文本显示输出结果 
+\subsubsection{课后习题2}
+vim：
+\# marco.sh 
+
+ MARCO\_DIR="" 
+
+ 
+ marco() \{ 
+ 
+ MARCO\_DIR=\$(pwd)
+ 
+ echo "Current directory saved: \$MARCO\_DIR"
+ 
+ \}
+ 
+ polo() \{ 
+ 
+ if [ -z "\$MARCO\_DIR" ]; then
+ 
+ echo "No directory saved. Please run 'marco' first."
+ 
+ else 
+ 
+ cd "\$MARCO\_DIR" || echo "Failed to change directory to \$MARCO\_DIR"
+ 
+ echo "Changed directory to: \$MARCO\_DIR" fi 
+ 
+ \}  
+\subsubsection{课后习题3}
+\#!/bin/bash 
+
+COMMAND="error.sh"
+
+
+LOG\_FILE="output.txt"
+
+RUN\_COUNT=0 
+
+while true; do 
+
+ \$COMMAND >> "\$LOG\_FILE" 2>\&1 
+ 
+ if [ \$? -ne 0 ]; then
+ 
+ echo "Command failed after \$RUN\_COUNT runs." break
+ 
+ fi 
+
+ RUN\_COUNT=\$((RUN\_COUNT + 1)) 
+ 
+ done 
+
+ echo "Output and errors from the command:" 
+ 
+ cat "\$LOG\_FILE"  
+\subsubsection{课后习题4}
+find
+/home/learn/shell
+-type
+f 
+-name "*.html" 
+-print0 
+| 
+zip
+-@
+output.zip
+
+-type f : 只查找文件 
+
+\verb|-name "*.html"|: 查找所有扩展名为 \verb|.html| 的文件 
+
+\verb|-print0|: 以 null 字符分隔输出文件名，这样可以正确处理文件名中的空格和特殊字符 
+
+\verb|zip -@ output.zip|: 从标准输入读取文件名并将它们压缩到 \verb|output.zip| 文件中 
+\subsubsection{课后习题5}
+find
+/home/learn/shell 
+-type
+f
+-atime
+-7 
+
+\verb|-atime -7|: 查找最近 7 天内访问过的文件。您可以根据需要调整数字以查找不同时间范围内的文件 
+\subsubsection{检查文件是否存在}
+FILE="/home/learn/file.txt"
+
+if [ -f "\$FILE" ]; then 
+
+     echo "\$FILE 存在。"
+     
+else 
+
+     echo "\$FILE 不存在。"
+     
+fi  
+\subsubsection{遍历文件}
+for FILE in *; do
+
+if [ -f "\$FILE" ]; then
+
+echo "文件: \$FILE"
+
+fi
+
+done  
+\subsubsection{计算1到10的总和}
+sum=0 
+
+for i in \{1..10\}; do
+
+sum=\$((sum + i))
+
+done 
+
+echo "1 到 10 的总和是: \$sum"  
+\subsubsection{简单输入输出}
+if [ \$# -eq 0 ]; then
+
+echo "请提供参数。"
+
+exit 1
+
+fi 
+
+echo "您提供的参数是: \$1"   
+\subsubsection{简单输出日期}
+\#!/bin/bash 
+
+echo "当前日期和时间: \$(date)" 
+\subsection{Vim}
+\subsubsection{打开文件}
+vim learn.sh 
+\subsubsection{插入模式}
+按 \verb|i| 进入插入模式，可以开始编辑文本 
+\subsubsection{保存文件 }
+在普通模式下，输入 \verb|:w| 并按 \verb|Enter| 保存文件
+\subsubsection{退出Vim}
+输入 \verb|:q| 并按 \verb|Enter| 退出Vim。如果文件有修改，需先保存
+\subsubsection{保存并退出}
+输入 \verb|:wq| 或 \verb|:x| 并按 \verb|Enter| 保存文件并退出 
+\subsubsection{强制退出}
+输入 \verb|:q!| 并按 \verb|Enter| 强制退出，不保存修改 
+\subsubsection{删除一行}
+在普通模式下，输入 \verb|dd| 删除当前行 
+\subsubsection{复制粘贴}
+复制当前行：输入 \verb|yy|
+
+粘贴：在光标位置输入 
+\subsubsection{撤销和重做}
+撤销上一步操作：输入 \verb|u| 
+
+重做上一步操作：输入 \verb|Ctrl + r| 
+\subsubsection{搜索文本}
+输入 \verb|/search_term| 并按 \verb|Enter| 搜索指定的文本，使用 \verb|n| 跳转到下一个匹配项 
+\section{使用感悟}
+\subsection{Shell和脚本}
+\subsubsection{提高效率}
+通过编写脚本，可以将一些重复性的任务自动化，从而节省时间和精力。这对于我们处理大量数据或执行复杂操作的场景非常有用。
+\subsubsection{调试困难}
+由于shell脚本是逐行执行的，调试起来有难度。我需要仔细检查每一行代码，确保没有语法错误和逻辑错误。 
+\subsection{Vim}
+\subsubsection{模式切换}
+vim拥有多个模式，包括命令模式、插入模式和可视模式。这需要我们熟练掌握每个模式的切换方法。
+\subsubsection{快捷键}
+vim拥有很多快捷键，这让我们在不用鼠标的情况下就可以完成文本编辑。熟练掌握这些快捷键可以提高我们文本编辑的速度。
+\section{github地址}
+\url{https://github.com/211-sss/homework}
+\end{document}

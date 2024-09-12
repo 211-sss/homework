@@ -1,0 +1,141 @@
+\documentclass{ctexart}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{hyperref}
+\title{Git实验报告}
+\author{耿惠生 23020007028}
+\date{September 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{练习内容}
+\subsection{git}
+\subsubsection{创建仓库，新建文件并提交}
+git init
+
+echo "first" > file.txt
+
+git add file.txt
+
+git commit -m"第一次提交"
+\subsubsection{查看当前工作区状态}
+git status
+\subsubsection{查看提交历史}
+git log
+
+git log -- online
+\subsubsection{向库中添加文件并提交，然后将它从历史中删除}
+echo "First" > file.txt
+
+git add file.txt
+
+git commit -m"提交"
+
+git filter-repo --path file.txt --invert-paths 
+
+git push origin main --force
+
+git log --all -- file.txt
+\subsubsection{课后习题5}
+nano \~/.gitconfig  
+
+graph = log --all --graph --decorate --oneline 
+
+git graph 
+\subsubsection{创建全局忽略规则 }
+git config --global core.excludesfile \~/.gitignore\_global 
+\subsubsection{创建并查看分支}
+git branch new-feature
+
+git checkout new-feature 
+
+git branch 
+\subsubsection{合并并删除分支}
+git checkout main
+
+git merge new-feature 
+
+git branch -d new-feature 
+\subsubsection{远端操作}
+git remote add origin https://missing-semester-cn.github.io/
+
+git remote -v 
+
+git clone 
+\subsubsection{高级操作}
+git add -p ：交互式暂存
+git rebase -i ：交互式变基
+git blame  ：查看最后修改某行的人 
+git stash  ：暂时移除工作目录下的修改内容 
+\subsection{Latex}
+\subsubsection{文档类型}
+documentclass\{类型\}
+\subsubsection{标题、作者、日期}
+\textbackslash{}title\{标题\}
+
+\textbackslash{}author\{作者\}
+
+\textbackslash{}date\{日期\}
+\subsubsection{正文}
+始于\textbackslash{}begin\{docement\}
+
+终于\textbackslash{}end\{document\}
+\subsubsection{显示前言区信息}
+\textbackslash{} maketitle
+\subsubsection{斜体、粗体、下划线}
+\textbackslash{}textit
+斜体
+
+\textbackslash{}underline
+下划线
+
+\textbackslash{}textbf
+粗体
+\subsubsection{章节}
+\textbackslash{}section
+章节
+
+\textbackslash{}subsection
+子章节
+
+\textbackslash{}subsubsection
+三级章节
+\subsubsection{添加图片}
+\textbackslash{}includegraphics\{图片名称\}
+\subsubsection{有序列表}
+\textbackslash{}begin\{enumerate\}
+
+\textbackslash{}item
+列表项1
+
+\textbackslash{}item
+列表项2
+
+\textbackslash{}end\{enumerate\}
+\subsubsection{无序列表}
+只需把有序列表中的"enumerate"改为"itemize"
+\subsubsection{表格}
+\textbackslash{}begin\{tabular\}\{c c c\} 
+c c c 表示表格有三列
+
+单元格 1 \& 单元格 2  \& 单元格 3
+
+单元格 4 \& 单元格 5  \& 单元格 6
+
+单元格 7 \& 单元格 8  \& 单元格 9
+
+\textbackslash{}end\{tabular\}
+\section{使用感悟}
+\subsection{git}
+\subsubsection{版本控制的重要性}
+Git 允许我们跟踪项目的每一次更改，能够随时查看历史记录，了解项目的演变过程。 
+\subsubsection{分支管理的灵活性}
+通过创建分支，团队成员可以在不同的功能上并行工作，避免了相互干扰。 
+\subsection{Latex}
+LaTeX 自动处理文档的格式，确保整个文档的一致性，减少了手动调整的需求。 
+
+LaTeX 强调文档的结构化，使用章节、节、子节等层次分明的组织方式，使得文档逻辑清晰。 
+\section{github}
+\url{https://github.com/211-sss/homework}
+\end{document}
